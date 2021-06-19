@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        /**
+         * Add your domain names here that the session manager needs to keep track of
+         * If the domain is not listed, the session persistance will not be handled
+         */
+        var allowedDomains = ['http://example.com', 'http://staging.example.com'];
+
+        //Session save and retrieve
+        var GliaSession = {
+            set: (payload) => {
+                localStorage.setItem('cross-domain-session', payload);
+            },
+            //post the session to the same domain requested for added security.
+            get: (origin) => {
+                window.parent.postMessage(localStorage.getItem('cross-domain-session'), origin);
+            }
+        };
+
+        window.addEventListener('message', (event) => {
+            //security validation to pass messages with only known domain names
+            if (!event.data || (allowedDomains.indexOf(event.origin) === -1)) {
+                return;
+            }
+            //get session if
+            switch (event.data.sessionFn) {
+                case 'get':
+                    GliaSession.get(event.origin);
+                    break;
+                case 'set':
+                    GliaSession.set(event.data.customSessionKey);
+                    break;
+                default:
+                    break;
+            }
+        });
+    </script>
+</head>
+<body></body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example</title>
+</head>
+
+<body>
+    <button id="button">Set Session</button>
+
+    <script src="http://example.com/session/session.js" type="text/javascript"></script>
+    <script>
+        //get session
+        window.addEventListener('session-get', (event) => {
+            var session = event.detail;
+            console.log(session, 'Session ID Get')
+        });
+
+        //set session on click of button
+        document.getElementById('button').addEventListener('click', () => {
+            let sessionId = 'SESSION-' + (new Date()).getTime();
+            //set session id
+            window.dispatchEvent(
+                new CustomEvent('session-set', {
+                    detail: sessionId,
+                })
+            );
+            console.log(sessionId, 'Session ID Set')
+        });
+    </script>
+</body>
+
+</html>
