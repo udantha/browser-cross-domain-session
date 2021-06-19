@@ -11,4 +11,4 @@ Note: Domain names are specifically hardcoded in files to prevent security issue
     <script type="text/javascript" src="http://example.com/session/session.js"></script>
 
 ## Testing
-- `staging` folder contains an example of including the javascript file and examples for getting and setting session.
+- `test` folder contains an example of including the javascript file and examples for getting and setting session.
