@@ -9,6 +9,20 @@ Note: Domain names are specifically hardcoded in files to prevent security issue
 - Add following Javascript to all the domains that need access to the session ID.
 >
     <script type="text/javascript" src="http://example.com/session/session.js"></script>
+### Usage
+Get session ID from Javascript
+>       //get session
+>        window.addEventListener('session-get', (event) => {
+>            var session = event.detail;
+>            console.log(session, 'Session ID Get')
+>        });
 
+Set session Id
+>           //set session id
+>            window.dispatchEvent(
+>                new CustomEvent('session-set', {
+>                    detail: 'session ID as a string',
+>                })
+>            );
 ## Testing
 - `test` folder contains an example of including the javascript file and examples for getting and setting session.
