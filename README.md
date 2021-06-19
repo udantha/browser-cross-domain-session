@@ -25,4 +25,8 @@ Set session Id
 >                })
 >            );
 ## Testing
-- `test` folder contains an example of including the javascript file and examples for getting and setting session.
+To test locally
+- Create virtual hosts for example.com & staging.example.com
+- Follow installation instructions above
+- Upload script in `test` folder to root of staging.example.com
+- Load staging.example.com in browser. Console log will print the session ID.
